@@ -40,10 +40,10 @@ tl.applyHandler(new MNumberHandler({
   duraction: 500,
   ease: MineEases.linear
 }), 500)
-tl.speed = 1;
-tl.seek(0)
+tl.speed = -1;
+tl.seek(1000)
 tl.run();
 
 setInterval(() => {
   console.log(a, b);
-}, 0);
+}, 10);

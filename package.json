@@ -1,0 +1,22 @@
+{
+  "name": "mine-motion",
+  "version": "2.0.0-alpha",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && node ./lib/test/test.js",
+    "build": "tsc",
+    "prepare": "tsc"
+  },
+  "files": [
+    "./lib/**/*",
+    "index.js",
+    "index.d.ts",
+    "README.md"
+  ],
+  "author": "surfish",
+  "license": "MIT",
+  "description": "A simple and lightweight animation library",
+  "dependencies": {
+    "typescript": "^5.7.2"
+  }
+}
