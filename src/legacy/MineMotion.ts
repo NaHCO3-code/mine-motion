@@ -1,5 +1,5 @@
-import { Ease, MineAnimatable, MineMotionConfig } from "./Interfaces";
-import { Mine } from "./Mine";
+import { EaseFunc, MineAnimatable, MineMotionConfig } from "../Interfaces";
+import { Mine_legacy } from "./Mine";
 
 /**
  * T 代表被应用动画的对象，
@@ -23,6 +23,7 @@ import { Mine } from "./Mine";
  * 这样就可以保证，传入的 start/end 中的所有属性一定在传入的对象上，并且 start 中的
  * 所有属性都在 end 中，end 中的所有属性都在 start 中，并且当传入的参数错误时，将会
  * 给出更好的报错提示，以及编译器将会给出更加精确的智能推断。
+ * @deprecated
  */
 export interface LazyMotionSetter<
   T extends MineAnimatable, 
@@ -31,7 +32,7 @@ export interface LazyMotionSetter<
   start: Partial<T> | null;
   end: Partial<T> | null;
   duraction: number | null;
-  ease: Ease | null;
+  ease: EaseFunc | null;
   setStart<P extends Partial<T>>
     (start: U extends null ? T extends P ? P : T : U)
     :LazyMotionSetter<T, U extends null ? P : U>
@@ -39,11 +40,14 @@ export interface LazyMotionSetter<
     (end: U extends null ? T extends P ? P : T : U)
     :LazyMotionSetter<T, U extends null ? P : U>
   setDuraction(duraction: number): LazyMotionSetter<T, U>
-  setEase(ease: Ease): LazyMotionSetter<T, U>
-  getMotion(): Mine<U extends null ? never : U>
+  setEase(ease: EaseFunc): LazyMotionSetter<T, U>
+  getMotion(): Mine_legacy<U extends null ? never : U>
 }
 
-export abstract class MineMotion{
+/**
+ * @deprecated
+ */
+export abstract class MineMotion_legacy{
   static animate<T extends MineAnimatable>
     (obj: T): LazyMotionSetter<T, null>{
     /**
@@ -92,7 +96,7 @@ export abstract class MineMotion{
         if(this.ease === null){
           throw new Error(`Properity ease is required. Did you forget calling setEase()?`);
         }
-        return new Mine({
+        return new Mine_legacy({
           obj, 
           start: this.start, 
           end: this.end, 

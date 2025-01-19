@@ -14,15 +14,13 @@ export class MNumberPlugin extends MinePlugin<number> {
 }
 
 export class MNumberHandler extends MineHandler<number> {
-  now: number = 0;
   constructor(config: MineHandlerConfig<number>){
     super(config);
   }
   seek(time: number){
-    this.now = time;
     this.setter(
       this.start 
-      + (this.end - this.start) * this.ease(this.now / this.duraction)
+      + (this.end - this.start) * this.ease(time / this.duraction)
     );
   }
 }

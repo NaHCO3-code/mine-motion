@@ -1,6 +1,6 @@
 export type Getter<T> = () => T;
 export type Setter<T> = (v: T) => void;
-export type Ease = (x: number) => number;
+export type EaseFunc = (x: number) => number;
 export type Result<Ok, Err> = Ok | Err;
 /** @deprecated */
 export type RecursivePartial<T> = {
@@ -27,7 +27,7 @@ export type MinePluse = {
 };
 export const MineEases = {
   linear: (x: number) => x,
-  sine: (x: number) => Math.sin(x * Math.PI)
+  sine: (x: number) => Math.sin(x * Math.PI / 2)
 } as const;
 
 
@@ -37,7 +37,7 @@ export interface MineHandlerConfig<T> {
   start?: T;
   end: T;
   duraction: number;
-  ease: Ease;
+  ease: EaseFunc;
 }
 
 export interface MineMotionConfig<T extends MineAnimatable> {
@@ -45,9 +45,5 @@ export interface MineMotionConfig<T extends MineAnimatable> {
   start: Partial<T>;
   end: Partial<T>;
   duraction: number;
-  ease: Ease;
-}
-
-export interface MineTimelineConfig {
-  pluseSource?: MinePluse
+  ease: EaseFunc;
 }

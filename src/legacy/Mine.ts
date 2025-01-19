@@ -1,12 +1,12 @@
-import { CanNotAnimateErr, Ease, MineAnimatable, MineMotionConfig } from "./Interfaces";
-import { MineHandler } from "./MineHandler";
-import { MinePluginManager } from "./MinePluginManager";
+import { CanNotAnimateErr, EaseFunc, MineAnimatable, MineMotionConfig } from "../Interfaces";
+import { MineHandler } from "../MineHandler";
+import { MinePluginManager } from "../MinePluginManager";
 
 /**
  * 插值器的管理器。
  * @deprecated
  */
-export class Mine<T extends MineAnimatable>{
+export class Mine_legacy<T extends MineAnimatable>{
   handlers: MineHandler<any>[] = [];
   now: number;
 
