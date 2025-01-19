@@ -5,7 +5,10 @@
   "scripts": {
     "test": "tsc && node ./lib/test/test.js",
     "build": "tsc",
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "docs:dev": "vitepress dev api-docs",
+    "docs:build": "vitepress build api-docs",
+    "docs:preview": "vitepress preview api-docs"
   },
   "files": [
     "./lib/**/*",
@@ -16,7 +19,8 @@
   "author": "surfish",
   "license": "MIT",
   "description": "A simple and lightweight animation library",
-  "dependencies": {
+  "devDependencies": {
+    "vitepress": "^1.5.0",
     "typescript": "^5.7.2"
   }
 }
