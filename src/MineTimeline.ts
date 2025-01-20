@@ -72,8 +72,8 @@ export class MineTimeline {
           offset
         });
         curv[prop] = value[prop];
-        offset += duraction;
       }
+      offset += duraction;
     }
   }
 
