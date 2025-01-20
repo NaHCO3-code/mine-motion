@@ -72,6 +72,7 @@ export class MineTimeline {
           offset
         });
         curv[prop] = value[prop];
+        offset += duraction;
       }
     }
   }
@@ -206,7 +207,7 @@ export class MineTimeline {
     }
     this.running = true;
     this.driverId = this.driver.drive(this);
-    
+
     const onFinish = this.onFinish;
     return new Promise<void>(resolve => {
       this.onStart?.();
