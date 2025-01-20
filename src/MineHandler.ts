@@ -1,10 +1,9 @@
-import { EaseFunc, Getter, MineEases, MineHandlerConfig, Setter } from "./Interfaces";
+import { EaseFunc, MineHandlerConfig, Setter } from "./Interfaces";
 
 /**
  * 处理动画的基类。
  */
 export abstract class MineHandler<T> {
-  getter: Getter<T>;
   setter: Setter<T>;
   start: T;
   end: T;
@@ -12,9 +11,8 @@ export abstract class MineHandler<T> {
   ease: EaseFunc;
   
   constructor(config: MineHandlerConfig<T>){
-    this.getter = config.getter;
     this.setter = config.setter;
-    this.start = config.start ?? this.getter();
+    this.start = config.start;
     this.end = config.end;
     this.duraction = config.duraction;
     this.ease = config.ease;

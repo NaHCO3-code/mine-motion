@@ -15,9 +15,9 @@ export class Mine_legacy<T extends MineAnimatable>{
       if(config.end[prop] === void 0) continue;
       if(config.obj[prop] === void 0) continue;
       let handler = MinePluginManager.getHandler<any>({
-        getter(){
-          return config.obj[prop]
-        },
+        // getter(){
+        //   return config.obj[prop]
+        // },
         setter(v){
           config.obj[prop] = v;
         },

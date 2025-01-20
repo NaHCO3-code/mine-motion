@@ -6,7 +6,7 @@ export class MNumberPlugin extends MinePlugin<number> {
   handle(config: MineHandlerConfig<any>)
     :Result<MineHandler<number>, CanNotAnimateErr> 
   {
-    if(typeof config.getter() !== 'number'){
+    if(typeof (config.start) !== 'number'){
       return CanNotAnimateErr;
     }
     return new MNumberHandler(config);

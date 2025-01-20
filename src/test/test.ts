@@ -1,10 +1,12 @@
-import { MNumberHandler } from "../BasePlugins/MNumberPlugin";
+import { MNumberHandler, MNumberPlugin } from "../BasePlugins/MNumberPlugin";
 import { Heap } from "../Heap";
 import { MineEases } from "../Interfaces";
 import { MineHandler } from "../MineHandler";
 import { MineMotion_legacy } from "../legacy/MineMotion";
 import { MineTimeline } from "../MineTimeline";
 import { MineTimeline_Experiment } from "../MineTimeline_Experiment";
+import { MinePluginManager } from "../MinePluginManager";
+MinePluginManager.register(new MNumberPlugin());
 
 // let a = 0;
 // let b = 0;
@@ -52,9 +54,10 @@ tl.fromTo(c, 'z', {
   start: 0,
   end: 100,
   duraction: 1000,
-  ease: MineEases.sine
-}, 0);
-tl.speed = 0.1;
+  ease: MineEases.sine,
+  offset: 0
+});
+tl.speed = 1;
 tl.seek(0);
 tl.run();
 

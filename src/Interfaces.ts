@@ -35,9 +35,8 @@ export const MineEases = {
 
 
 export interface MineHandlerConfig<T> {
-  getter: Getter<T>,
   setter: Setter<T>,
-  start?: T;
+  start: T;
   end: T;
   duraction: number;
   ease: EaseFunc;
