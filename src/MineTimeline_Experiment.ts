@@ -186,4 +186,4 @@ export class MineTimeline_Experiment {
   }
 }
 
-MineTimeline_Experiment.enableInnerInterval();
+// MineTimeline_Experiment.enableInnerInterval();

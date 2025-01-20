@@ -33,5 +33,3 @@ export abstract class MinePluginManager {
     return CanNotAnimateErr;
   }
 }
-
-MinePluginManager.register(new MNumberPlugin());

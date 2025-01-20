@@ -26,8 +26,11 @@ export type MinePluse = {
   seperate: (id: symbol) => void;
 };
 export const MineEases = {
-  linear: (x: number) => x,
-  sine: (x: number) => Math.sin(x * Math.PI / 2)
+  linear: (r: number) => r,
+  sine: (r: number) => Math.sin(r*Math.PI/2),
+  easeInOut: (r: number) => 6*r**5 - 15*r**4 + 10*r**3,
+  easeIn: (r: number) => Math.sqrt(r),
+  easeOut: (r: number) => r ** 3
 } as const;
 
 

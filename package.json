@@ -1,5 +1,5 @@
 {
-  "name": "mine-motion",
+  "name": "@dao3fun/mine-motion",
   "version": "2.0.0-alpha",
   "main": "index.js",
   "scripts": {
