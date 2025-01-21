@@ -1,12 +1,12 @@
 import { EaseFunc, MineHandlerConfig, Setter } from "./Interfaces";
 
 /**
- * 处理动画的基类。
+ * 描述动画的基本单位。
  */
 export abstract class MineHandler<T> {
   setter: Setter<T>;
-  start: T;
-  end: T;
+  start: any;
+  end: any;
   duraction: number;
   ease: EaseFunc;
   

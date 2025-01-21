@@ -186,4 +186,5 @@ export class MineTimeline_Experiment {
   }
 }
 
+// 如果需要，请手动启用该实验性功能。
 // MineTimeline_Experiment.enableInnerInterval();

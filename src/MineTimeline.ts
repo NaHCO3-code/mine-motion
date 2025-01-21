@@ -1,7 +1,7 @@
-import { CanNotAnimateErr, EaseFunc, MineAnimatable, MineEases } from "./Interfaces";
+import { CanNotAnimateErr, EaseFunc, MineAnimatable, MineEases, MotionDriver } from "./Interfaces";
 import { MineHandler } from "./MineHandler";
 import { MinePluginManager } from "./MinePluginManager";
-import { MotionDriver, MTimeDriverInstance } from "./MotionDriver";
+import { MDefaultDriver } from "./MTimeDriver";
 
 export class MineTimeline {
   private handlers: {
@@ -9,12 +9,12 @@ export class MineTimeline {
     handler: MineHandler<any>
   }[] = [];
 
-  now: number = 0;
-  running: boolean = false;
-  duration: number = 0;
+  private _now: number = 0;
+  private _running: boolean = false;
+  private _duration: number = 0;
   driver: MotionDriver;
-  driverId: symbol | null = null;
-  autoStop: boolean = true;
+  private driverId: symbol | null = null;
+  readonly autoStop: boolean = true;
   onFinish?: () => void;
   onStart?: () => void;
   private _speed: number = 1;
@@ -24,8 +24,20 @@ export class MineTimeline {
   }
 
   set speed(v: number){
-    if(this.running) throw new Error('Can not set speed when timeline is running');
+    if(this._running) throw new Error('Can not set speed when timeline is running');
     this._speed = v;
+  }
+
+  get now(){
+    return this._now;
+  }
+
+  get duration(){
+    return this._duration;
+  }
+
+  get running(){
+    return this._running;
   }
 
   constructor(config?: {
@@ -35,7 +47,7 @@ export class MineTimeline {
     driver?: MotionDriver
   }){
     this.autoStop = config?.autoStop ?? true;
-    this.driver = config?.driver ?? MTimeDriverInstance;
+    this.driver = config?.driver ?? MDefaultDriver;
     this.onFinish = config?.onFinish;
     this.onStart = config?.onStart;
   }
@@ -99,7 +111,8 @@ export class MineTimeline {
       ease
     });
     if(handler === CanNotAnimateErr){
-      throw new Error(`Can not animate the property "${String(prop)}". You may need extra plugins to make it work.`);
+      throw new Error(`Can not animate the property "${String(prop)}".
+You may need extra plugins to make it work.`);
     }
     this.applyHandler(handler, offset);
   }
@@ -125,7 +138,8 @@ export class MineTimeline {
       ease
     });
     if(handler === CanNotAnimateErr){
-      throw new Error(`Can not animate the property "${String(prop)}". You may need extra plugins to make it work.`);
+      throw new Error(`Can not animate the property "${String(prop)}". 
+You may need extra plugins to make it work.`);
     }
     this.applyHandler(handler, offset);
   }
@@ -136,8 +150,8 @@ export class MineTimeline {
    * @param start 开始时间
    */
   applyHandler(handler: MineHandler<any>, start: number){
-    if(this.running) throw new Error('Can not apply handler when timeline is running');
-    this.duration = Math.max(this.duration, start + handler.duraction);
+    if(this._running) throw new Error('Can not apply handler when timeline is running');
+    this._duration = Math.max(this._duration, start + handler.duraction);
     this.handlers.push({start, handler});
   }
 
@@ -146,16 +160,16 @@ export class MineTimeline {
    * @param deltaMs 与上一次更新间隔的时间
    */
   update(deltaMs: number){
-    this.now += deltaMs;
-    this.seek(this.now);
+    this._now += deltaMs;
+    this.seek(this._now);
   }
 
   seek: (t: number) => void = this.seek_positive;
 
   /** 跳转到某一时间（速度为正） */
   seek_positive(t: number){
-    this.now = t;
-    const real = this.now * this._speed;
+    this._now = t;
+    const real = this._now * this._speed;
     for(const rec of this.handlers){
       if(real >= rec.start + rec.handler.duraction){
         rec.handler.seek(rec.handler.duraction);
@@ -166,7 +180,7 @@ export class MineTimeline {
       }
       rec.handler.seek(real - rec.start);
     }
-    if(this.autoStop && this.now >= this.duration){
+    if(this.autoStop && real >= this._duration){
       this.pause();
       this.onFinish?.();
     }
@@ -174,8 +188,8 @@ export class MineTimeline {
 
   /** 跳转到某一时间（速度为负） */
   seek_negative(t: number){
-    this.now = t;
-    const real = this.now * this._speed;
+    this._now = t;
+    const real = this._now * this._speed;
     for(const rec of this.handlers){
       console.log(real, rec);
       if(real <= rec.start){
@@ -187,7 +201,7 @@ export class MineTimeline {
       }
       rec.handler.seek(real - rec.start);
     }
-    if(this.autoStop && this.now >= 0){
+    if(this.autoStop && this._now >= 0){
       this.pause();
       this.onFinish?.();
     }
@@ -196,8 +210,8 @@ export class MineTimeline {
   /**
    * 运行时间轴。
    */
-  run(){
-    if(this.running) return;
+  run(resetTime: boolean = true){
+    if(this._running) return;
     if(this._speed > 0){
       this.handlers.sort((a, b) => a.start + a.handler.duraction - b.start - b.handler.duraction);
       this.seek = this.seek_positive;
@@ -205,7 +219,10 @@ export class MineTimeline {
       this.handlers.sort((a, b) => b.start - a.start);
       this.seek = this.seek_negative;
     }
-    this.running = true;
+    if(resetTime){
+      this._now = this._speed > 0 ? 0 : -this._duration;
+    }
+    this._running = true;
     this.driverId = this.driver.drive(this);
 
     const onFinish = this.onFinish;
@@ -222,7 +239,7 @@ export class MineTimeline {
    * 暂停时间轴。
    */
   pause(){
-    this.running = false;
+    this._running = false;
     if(this.driverId) this.driver.remove(this.driverId);
   }
 }

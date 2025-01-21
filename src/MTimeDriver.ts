@@ -1,17 +1,10 @@
-type MDriverable = {
-  update(dt: number): void,
-  seek(time: number): void
-}
+import { MDriveable, MotionDriver } from "./Interfaces";
 
-export interface MotionDriver {
-  drive(motion: MDriverable): symbol
-  remove(motion: symbol): void
-  destroy(): void
-}
+
 
 export class MTimeDriver implements MotionDriver {
   private motions: {
-    motion: MDriverable,
+    motion: MDriveable,
     id: symbol
   }[] = [];
 
@@ -30,7 +23,7 @@ export class MTimeDriver implements MotionDriver {
     this.motions = [];
   }
 
-  drive(motion: MDriverable): symbol {
+  drive(motion: MDriveable): symbol {
     const id = Symbol();
     this.motions.push({
       motion,
@@ -46,4 +39,4 @@ export class MTimeDriver implements MotionDriver {
   }
 }
 
-export const MTimeDriverInstance = new MTimeDriver();
+export const MDefaultDriver = new MTimeDriver();
