@@ -52,13 +52,13 @@ export abstract class MineMotion {
     obj: T,
     keyframes: {value: Partial<T>, duraction?: number, ease?: EaseFunc}[],
     config: {
-      offset: number,
+      delay?: number,
       speed?: number
     }
   ) {
     const tl = new MineTimeline();
     tl.animate(obj, keyframes, {
-      offset: config.offset,
+      offset: config.delay ?? 0,
     });
     tl.speed = config.speed ?? 1;
     await tl.run();

@@ -210,7 +210,7 @@ You may need extra plugins to make it work.`);
   /**
    * 运行时间轴。
    */
-  run(resetTime: boolean = true){
+  run(reset: boolean = true){
     if(this._running) return;
     if(this._speed > 0){
       this.handlers.sort((a, b) => a.start + a.handler.duraction - b.start - b.handler.duraction);
@@ -219,8 +219,8 @@ You may need extra plugins to make it work.`);
       this.handlers.sort((a, b) => b.start - a.start);
       this.seek = this.seek_negative;
     }
-    if(resetTime){
-      this._now = this._speed > 0 ? 0 : -this._duration;
+    if(reset){
+      this.seek(this._speed > 0 ? 0 : -this._duration);
     }
     this._running = true;
     this.driverId = this.driver.drive(this);

@@ -6,7 +6,10 @@ import { MineMotion_legacy } from "../legacy/MineMotion";
 import { MineTimeline } from "../MineTimeline";
 import { MineTimeline_Experiment } from "../MineTimeline_Experiment";
 import { MinePluginManager } from "../MinePluginManager";
+import { MDataDriver } from "../MDataDriver";
+import { ref } from "../Reactive";
 MinePluginManager.register(new MNumberPlugin());
+
 
 // let a = 0;
 // let b = 0;
@@ -35,33 +38,37 @@ MinePluginManager.register(new MNumberPlugin());
 //   console.log(a, b);
 // }, 10);
 
-let a = 0;
-let b = 0;
+let d = ref(0);
 let c = {
   z: 100,
   // x: 0,
   // y: 0,
 }
-const tl = new MineTimeline();
-// tl.animate(c, [
-//   {value: {x: 0, y: 0}, duraction: 1000},
-//   {value: {x: 100, y: 100}, duraction: 1000},
-//   {value: {x: 500, y: 1000}, duraction: 1000}
-// ], {
-//   offset: 0,
-// })
+const tl = new MineTimeline({
+  driver: new MDataDriver(d, {
+    damping: {
+      enabled: true,
+      halflife: 1000,
+      deltaMs: 10
+    }
+  })
+});
 tl.fromTo(c, 'z', {
   start: 0,
   end: 100,
-  duraction: 1000,
-  ease: MineEases.sine,
+  duraction: 10000,
+  ease: MineEases.linear,
   offset: 0
 });
 tl.speed = 1;
-tl.seek(0);
+// tl.seek(0);
 tl.run();
 
 setInterval(() => {
-  // console.clear();
   console.log(c);
 }, 100);
+
+setInterval(() => {
+  d.value += 1000;
+  console.log(`jmp ${d.value}`);
+}, 500);
