@@ -29,7 +29,7 @@ export class MDataDriver implements MotionDriver {
       // 如果启用了阻尼，并且当前值与数据源值相差过大，则进行阻尼缓动
       if(
         damping.enabled 
-        && Math.abs(data.value - current.value) > Math.abs(data.value) * 1e-2
+        && Math.abs(data.value - current.value) > Math.abs(data.value) * 1e-4
       ){
         setTimeout(() => {
           current.value = damper(

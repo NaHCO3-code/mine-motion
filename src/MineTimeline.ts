@@ -1,4 +1,5 @@
 import { CanNotAnimateErr, EaseFunc, MineAnimatable, MineEases, MotionDriver } from "./Interfaces";
+import { MDataDriver } from "./MDataDriver";
 import { MineHandler } from "./MineHandler";
 import { MinePluginManager } from "./MinePluginManager";
 import { MDefaultDriver } from "./MTimeDriver";
@@ -46,8 +47,8 @@ export class MineTimeline {
     onStart?: () => void,
     driver?: MotionDriver
   }){
-    this.autoStop = config?.autoStop ?? true;
     this.driver = config?.driver ?? MDefaultDriver;
+    this.autoStop = config?.autoStop ?? (this.driver instanceof MDataDriver ? false : true);
     this.onFinish = config?.onFinish;
     this.onStart = config?.onStart;
   }
@@ -69,7 +70,7 @@ export class MineTimeline {
       throw new Error('Can not animate an object without keyframes.');
     }
     let { offset = 0 } = config;
-    let curv = keyframes[0].value;
+    let curv = {...keyframes[0].value};
     for(let prop in curv){
       curv[prop] = obj[prop];
     }
