@@ -10,7 +10,7 @@ Timeline API 可以帮助创建更强大的动画。
 
 | 参数名 | 类型 | 描述 |
 | --- | --- | --- |
-| config? | [MTimelineConfig](/api/types/#mtimelineconfig) | 配置对象 |
+| config? | [MTimelineConfig](/api/types#mtimelineconfig) | 配置对象 |
 
 默认值
 
@@ -32,8 +32,8 @@ Timeline API 可以帮助创建更强大的动画。
 | 参数名 | 类型 | 描述 |
 | --- | --- | --- |
 | obj | T | 动画对象 |
-| keyframes | [MKeyframe](/api/types/#mkeyframe-lt-t-extends-mineanimatable-gt)&lt;T&gt;[] | 关键帧数组 |
-| config | [MAnimationConfig](/api/types/#manimationconfig) | 配置对象 |
+| keyframes | [MKeyframe](/api/types#mkeyframe-lt-t-extends-mineanimatable-gt)&lt;T&gt;[] | 关键帧数组 |
+| config | [MAnimationConfig](/api/types#manimationconfig) | 配置对象 |
 
 默认值
 

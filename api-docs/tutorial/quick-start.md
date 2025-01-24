@@ -1,6 +1,6 @@
 # 快速开始
 
-这个教程适用于 [ArenaPro](https://docs.box3lab.com/arenapro/) 插件用户。在 [这里]() 不能访问到还未编写的适用于 Web 开发的文档。
+这个教程适用于 [ArenaPro](https://docs.box3lab.com/arenapro/) 插件用户。在 [这里](#) 不能访问到还未编写的适用于 Web 开发的文档。
 
 ## 概览
 
@@ -281,4 +281,4 @@ tl.run();
 ```
 :::
 
-关于 Timeline 的更多功能和详细解释，请查看API文档。
+关于 Timeline 的更多功能和详细解释，请查看 [API 文档](/api/timeline)。
