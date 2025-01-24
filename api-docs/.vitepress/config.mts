@@ -5,6 +5,7 @@ export default defineConfig({
   title: "Mine Motion 2.0",
   description: "A simple and lightweight animation library.",
   outDir: '../docs',
+  base: '/mine-motion/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -13,11 +14,26 @@ export default defineConfig({
     ],
 
     sidebar: [
+      // {
+      //   text: 'Examples',
+      //   items: [
+      //     { text: 'Guidence(specific for Arena Editor user)', link: '/markdown-examples' },
+      //     { text: 'API Reference', link: '/api-examples' }
+      //   ]
+      // }
       {
-        text: 'Examples',
+        text: "教程 (Arena Editor)",
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: "快速开始", link: "/tutorial/quick-start" }
+        ]
+      },
+      {
+        text: "API 参考",
+        items: [
+          { text: "Timeline API", link: "/api/timeline" },
+          { text: "Data Driver", link: "/api/datadriver" },
+          { text: "Reactive", link: "/api/reactive" },
+          { text: "Types", link: "/api/types" },
         ]
       }
     ],

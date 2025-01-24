@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: Quick start
-      link: /markdown-examples
+      link: /tutorial/quick-start
     - theme: alt
       text: API Reference
-      link: /api-examples
+      link: /api/reference
 
 features:
   - title: Simple
