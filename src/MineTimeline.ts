@@ -152,6 +152,8 @@ You may need extra plugins to make it work.`);
    */
   applyHandler(handler: MineHandler<any>, start: number){
     if(this._running) throw new Error('Can not apply handler when timeline is running');
+    // 避免零时长
+    if(handler.duraction === 0) handler.duraction += 1e-5;
     this._duration = Math.max(this._duration, start + handler.duraction);
     this.handlers.push({start, handler});
   }

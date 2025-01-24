@@ -51,16 +51,16 @@ export abstract class MineMotion {
   static async animate<T extends MineAnimatable>(
     obj: T,
     keyframes: {value: Partial<T>, duraction?: number, ease?: EaseFunc}[],
-    config: {
+    config?: {
       delay?: number,
       speed?: number
     }
   ) {
     const tl = new MineTimeline();
     tl.animate(obj, keyframes, {
-      offset: config.delay ?? 0,
+      offset: config?.delay ?? 0,
     });
-    tl.speed = config.speed ?? 1;
+    tl.speed = config?.speed ?? 1;
     await tl.run();
   }
 }
