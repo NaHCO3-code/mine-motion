@@ -3,6 +3,10 @@ import { CanNotAnimateErr, MineHandlerConfig, Result } from "./Interfaces";
 import { MineHandler } from "./MineHandler";
 import { MinePlugin } from "./MinePlugin";
 
+
+/**
+ * 插件管理器，用于管理所有插件。
+ */
 export abstract class MinePluginManager {
   /** @description 所有插件 */
   private static plugins: MinePlugin<any>[] = [];

@@ -2,7 +2,9 @@ export {
   MineEases,
   MineAnimatable,
   MDriveable,
+  MineHandlerConfig,
 } from './lib/Interfaces'
+export { MineHandler } from './lib/MineHandler'
 export { MineTimeline } from './lib/MineTimeline'
 export { MineMotion } from './lib/MineMotion'
 export { MineTimeline_Experiment } from './lib/MineTimeline_Experiment'

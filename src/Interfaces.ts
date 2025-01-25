@@ -27,14 +27,38 @@ export type MineAnimatable = { [K: string | number]: any };
 
 /** 可以运行动画的对象 */
 export type MDriveable = {
+  /**
+   * 根据时间增量更新当前值
+   * @param dt 时间增量
+   */
   update(dt: number): void,
+
+  /**
+   * 根据相对时间更新当前值
+   * @param time 时间
+   */
   seek(time: number): void
 };
+
 /** 动画驱动器 */
 export interface MotionDriver {
-  drive(motion: MDriveable): symbol
-  remove(motion: symbol): void
-  destroy(): void
+  /**
+   * 驱动可被驱动的对象
+   * @param motion 需要驱动的对象
+   * @returns 用于移除该驱动的标识符
+   */
+  drive(motion: MDriveable): symbol;
+
+  /**
+   * 移除可被驱动的对象
+   * @param motion 需要移除的对象
+   */
+  remove(motion: symbol): void;
+
+  /**
+   * 销毁驱动器
+   */
+  destroy(): void;
 }
 
 /** @deprecated 仅用于 MineTimeline_Experiment，未来会被移除 */
@@ -54,7 +78,7 @@ export const MineEases = {
 
 /** 处理器配置 */
 export interface MineHandlerConfig<T> {
-  setter: Setter<T>,
+  setter: Setter<T>;
   start: T;
   end: T;
   duraction: number;

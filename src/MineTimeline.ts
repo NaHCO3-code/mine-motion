@@ -13,12 +13,15 @@ export class MineTimeline {
   private _now: number = 0;
   private _running: boolean = false;
   private _duration: number = 0;
-  driver: MotionDriver;
+  private driver: MotionDriver;
   private driverId: symbol | null = null;
   readonly autoStop: boolean = true;
-  onFinish?: () => void;
-  onStart?: () => void;
+  private resolve?: (() => void) | null;
   private _speed: number = 1;
+  /** 当时间轴停止时调用，如果 autoStop 为 true，则不起效。 */
+  onFinish: (() => void) | null;
+  /** 当时间轴开始时调用，如果 autoStop 为 true，则不起效。 */
+  onStart: (() => void) | null;
   
   get speed(){
     return this._speed;
@@ -41,6 +44,10 @@ export class MineTimeline {
     return this._running;
   }
 
+  /**
+   * 创建一个 Timeline
+   * @param config Timeline 配置
+   */
   constructor(config?: {
     autoStop?: boolean,
     onFinish?: () => void,
@@ -49,8 +56,8 @@ export class MineTimeline {
   }){
     this.driver = config?.driver ?? MDefaultDriver;
     this.autoStop = config?.autoStop ?? (this.driver instanceof MDataDriver ? false : true);
-    this.onFinish = config?.onFinish;
-    this.onStart = config?.onStart;
+    this.onFinish = config?.onFinish ?? null;
+    this.onStart = config?.onFinish ?? null;
   }
 
   /**
@@ -90,6 +97,12 @@ export class MineTimeline {
     }
   }
 
+  /**
+   * 针对某个属性添加动画。
+   * @param obj 目标对象
+   * @param prop 目标属性
+   * @param config 动画配置
+   */
   fromTo<T extends MineAnimatable, K extends keyof T>(
     obj: T,
     prop: K,
@@ -118,6 +131,12 @@ You may need extra plugins to make it work.`);
     this.applyHandler(handler, offset);
   }
 
+  /**
+   * 针对某个属性添加动画。
+   * @param obj 目标对象
+   * @param prop 目标属性
+   * @param config 动画配置
+   */
   to<T extends MineAnimatable, K extends keyof T>(
     obj: T,
     prop: K,
@@ -167,10 +186,14 @@ You may need extra plugins to make it work.`);
     this.seek(this._now);
   }
 
+  /**
+   * 跳转到某一时间。
+   * @param t 时间
+   */
   seek: (t: number) => void = this.seek_positive;
 
   /** 跳转到某一时间（速度为正） */
-  seek_positive(t: number){
+  private seek_positive(t: number){
     this._now = t;
     const real = this._now * this._speed;
     for(const rec of this.handlers){
@@ -186,11 +209,13 @@ You may need extra plugins to make it work.`);
     if(this.autoStop && real >= this._duration){
       this.pause();
       this.onFinish?.();
+      this.resolve?.();
+      this.resolve = null;
     }
   }
 
   /** 跳转到某一时间（速度为负） */
-  seek_negative(t: number){
+  private seek_negative(t: number){
     this._now = t;
     const real = this._now * this._speed;
     for(const rec of this.handlers){
@@ -207,6 +232,8 @@ You may need extra plugins to make it work.`);
     if(this.autoStop && this._now >= 0){
       this.pause();
       this.onFinish?.();
+      this.resolve?.();
+      this.resolve = null;
     }
   }
 
@@ -231,10 +258,7 @@ You may need extra plugins to make it work.`);
     const onFinish = this.onFinish;
     return new Promise<void>(resolve => {
       this.onStart?.();
-      this.onFinish = () => {
-        onFinish?.();
-        resolve();
-      }
+      this.resolve = resolve;
     });
   }
 

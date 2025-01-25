@@ -4,6 +4,7 @@ import { ref, Ref, watch } from "./Reactive";
 
 export class MDataDriver implements MotionDriver {
   motions: { motion: MDriveable, id: symbol }[] = [];
+
   constructor(data: Ref<number>, config?: {
     scale?: number,
     damping?: {
@@ -48,14 +49,17 @@ export class MDataDriver implements MotionDriver {
       }
     });
   }
+
   destroy() {
     this.motions = [];
   }
+
   drive(motion: MDriveable): symbol {
     const id = Symbol();
     this.motions.push({motion, id});
     return id;
   }
+  
   remove(motion: symbol): void {
     const index = this.motions.findIndex(m => m.id === motion);
     if(index === -1) return;
