@@ -40,25 +40,8 @@ import { MineEases, MineMotion } from "@dao3fun/mine-motion";
 // 创建 UiScreen
 const defaultScreen = UiScreen.create();
 
-// 创建容器
+// 创建容器并初始化
 const box = UiBox.create();
-
-// 设置容器属性
-box.backgroundColor.r = 200;
-box.size.offset.x = 100;
-box.size.offset.y = 100;
-box.parent = defaultScreen;
-
-// 应用动画
-import { MineEases, MineMotion } from "@dao3fun/mine-motion";
-
-// 创建 UiScreen
-const defaultScreen = UiScreen.create();
-
-// 创建容器
-const box = UiBox.create();
-
-// 设置容器属性
 box.backgroundColor.r = 200;
 box.size.offset.x = 100;
 box.size.offset.y = 100;
