@@ -2,6 +2,7 @@
   "name": "@dao3fun/mine-motion",
   "version": "2.0.0-beta.3",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "tsc && node ./lib/test/test.js",
     "build": "tsc",
