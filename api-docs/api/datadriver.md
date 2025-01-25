@@ -21,7 +21,7 @@
 | scale? | number | 数据源到时间的缩放倍数 |
 | damping? | [MDataDriverDampingConfig](#mdatadriverdampingconfig) | 阻尼配置 |
 
-#### MDataDriverDampingConfig
+### MDataDriverDampingConfig
 
 | 属性 | 类型 | 描述 |
 | --- | --- | --- |

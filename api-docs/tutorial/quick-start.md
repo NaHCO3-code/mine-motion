@@ -30,7 +30,7 @@ npm install @dao3fun/mine-motion
 
 ## Hello World
 
-这并非真的输出一个 `Hello, world`，而是 Mine Motion 的一个最基本的示例。
+这并非真的输出一个 `Hello, world`，而是 MineMotion 的一个最基本的示例。
 
 在这个示例中，我们创建了一个正方形，并且在 1 秒内将正方形从 (0, 0) 移动到 (100, 100)。
 
@@ -69,11 +69,11 @@ MineMotion.animate(box.position.offset, [
 
 在第三个参数中，我们传入了关于这个动画的一些配置，例如开始前延迟的时间，动画速度等。这个参数并非必须，也就是可以不传入第三个参数，默认的配置为 `{delay: 0, speed: 1}`。
 
-你可以试试改变上面例子中的一些参数体会 Mine Motion 的一些功能。
+你可以试试改变上面例子中的一些参数体会 MineMotion 的一些功能。
 
 ## Timeline
 
-Mine Motion 2 最核心的功能就在于 `Timeline`。使用 Timeline，你可以管理多个动画，并让它们协同工作。
+MineMotion 最核心的功能就在于 `Timeline`。使用 Timeline，你可以管理多个动画，并让它们协同工作。
 
 以下是 Timeline 的一个简单示例：
 
@@ -168,7 +168,7 @@ tl.run();
 
 我们当然可以手动监听玩家的血量数据，并且根据这个数据配合 `tl.seek` 方法实现一个动态的血量条。但是这么做可能会带来很多维护上的麻烦。
 
-幸运的是，在 `Timeline` 中，我们可以用非常容易的方式将上面的动画变成一个真的血量条。这就需要使用 Timeline 的**数据驱动**功能了。
+幸运的是，在 Timeline 中，我们可以用非常容易的方式将上面的动画变成一个真的血量条。这就需要使用 Timeline 的**数据驱动**功能了。
 
 Timeline 的数据驱动功能基于响应式实现，这就是说我们的数据必须是响应式的。我们可以使用 `ref` 函数创建一个响应式数据。
 
@@ -176,7 +176,7 @@ Timeline 的数据驱动功能基于响应式实现，这就是说我们的数�
 const hp = ref(100);
 ```
 
-此时 `hp` 是一个对象，有一个属性 `value`，这个属性就是我们的数据。
+此时 `hp` 是一个对象，有一个属性 `value`，这个属性就是我们的数据。在上面的例子中，`hp.value` 的值应该是 `100`。
 
 接着我们需要更改 `tl` 的配置：
 
@@ -186,7 +186,7 @@ const tl = new MineTimeline({
 });
 ```
 
-我们在创建 `MineTimeline` 时配置了 `driver` 属性，这个属性被设置为了一个新创建的 `MDataDriver` 对象。我们将 `hp` 用于初始化 `MDataDriver`。这样，当 `hp` 的值发生变化时，`MDataDriver` 会自动更新 `tl` 中的动画。
+我们在创建 `MineTimeline` 时配置了 `driver` 属性，这个属性被设置为了一个 `MDataDriver` 对象，并且我们将 `hp` 用于初始化 `MDataDriver`。这样，当 `hp` 的值发生变化时，`MDataDriver` 会捕捉这个更新，并自动更新 `tl` 的进度。
 
 以下是完整代码，你可以尝试运行看看效果。鼠标左键点击会减少血量，右键点击会增加血量。
 
@@ -264,4 +264,4 @@ tl.run();
 ```
 :::
 
-关于 Timeline 的更多功能和详细解释，请查看 [API 文档](/api/timeline)。
+关于 Timeline 的更多功能和详细解释，请查看 [API 文档](/api/overview)。

@@ -10,7 +10,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      // { text: 'Examples', link: '/markdown-examples' }
     ],
 
     sidebar: [
@@ -30,10 +30,13 @@ export default defineConfig({
       {
         text: "API 参考",
         items: [
+          { text: "Overview", link: "/api/overview" },
           { text: "Timeline API", link: "/api/timeline" },
           { text: "Data Driver", link: "/api/datadriver" },
           { text: "Reactive", link: "/api/reactive" },
           { text: "Types", link: "/api/types" },
+          { text: "Handler", link: "/api/handler" },
+          { text: "Plugin", link: "/api/plugin" },
         ]
       }
     ],
