@@ -7,14 +7,14 @@ export abstract class MineHandler<T> {
   setter: Setter<T>;
   start: any;
   end: any;
-  duraction: number;
+  duration: number;
   ease: EaseFunc;
   
   constructor(config: MineHandlerConfig<T>){
     this.setter = config.setter;
     this.start = config.start;
     this.end = config.end;
-    this.duraction = config.duraction;
+    this.duration = config.duration;
     this.ease = config.ease;
   }
 

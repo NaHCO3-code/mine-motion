@@ -68,7 +68,7 @@ export class MineTimeline {
    */
   animate<T extends MineAnimatable>(
     obj: T,
-    keyframes: {value: Partial<T>, duraction?: number, ease?: EaseFunc}[],
+    keyframes: {value: Partial<T>, duration?: number, ease?: EaseFunc}[],
     config: {
       offset: number,
     }
@@ -82,18 +82,18 @@ export class MineTimeline {
       curv[prop] = obj[prop];
     }
     for(let frame of keyframes){
-      const {value, duraction = 1000, ease = MineEases.linear} = frame;
+      const {value, duration = 1000, ease = MineEases.linear} = frame;
       for(let prop in value){
         this.fromTo(obj, prop, {
           start: curv[prop] ?? obj[prop],
           end: value[prop],
-          duraction,
+          duration,
           ease,
           offset
         });
         curv[prop] = value[prop];
       }
-      offset += duraction;
+      offset += duration;
     }
   }
 
@@ -109,19 +109,19 @@ export class MineTimeline {
     config: {
       start: T[K],
       end: T[K],
-      duraction: number,
+      duration: number,
       ease?: EaseFunc,
       offset?: number
     }
   ){
-    const {start, end, duraction, ease = MineEases.linear, offset = 0} = config;
+    const {start, end, duration, ease = MineEases.linear, offset = 0} = config;
     const handler = MinePluginManager.getHandler<any>({
       setter(v){
         obj[prop] = v;
       },
       start,
       end,
-      duraction,
+      duration,
       ease
     });
     if(handler === CanNotAnimateErr){
@@ -142,19 +142,19 @@ You may need extra plugins to make it work.`);
     prop: K,
     config: {
       end: T[K],
-      duraction: number,
+      duration: number,
       ease?: EaseFunc
       offset?: number
     },
   ){
-    const {end, duraction, ease = MineEases.linear, offset = 0} = config;
+    const {end, duration, ease = MineEases.linear, offset = 0} = config;
     const handler = MinePluginManager.getHandler<any>({
       setter(v){
         obj[prop] = v;
       },
       start: obj[prop],
       end,
-      duraction,
+      duration,
       ease
     });
     if(handler === CanNotAnimateErr){
@@ -172,8 +172,8 @@ You may need extra plugins to make it work.`);
   applyHandler(handler: MineHandler<any>, start: number){
     if(this._running) throw new Error('Can not apply handler when timeline is running');
     // 避免零时长
-    if(handler.duraction === 0) handler.duraction += 1e-5;
-    this._duration = Math.max(this._duration, start + handler.duraction);
+    if(handler.duration === 0) handler.duration += 1e-5;
+    this._duration = Math.max(this._duration, start + handler.duration);
     this.handlers.push({start, handler});
   }
 
@@ -197,8 +197,8 @@ You may need extra plugins to make it work.`);
     this._now = t;
     const real = this._now * this._speed;
     for(const rec of this.handlers){
-      if(real >= rec.start + rec.handler.duraction){
-        rec.handler.seek(rec.handler.duraction);
+      if(real >= rec.start + rec.handler.duration){
+        rec.handler.seek(rec.handler.duration);
         continue;
       }
       if(real < rec.start){
@@ -224,7 +224,7 @@ You may need extra plugins to make it work.`);
         rec.handler.seek(0);
         continue;
       }
-      if(real >= rec.start + rec.handler.duraction){
+      if(real >= rec.start + rec.handler.duration){
         continue;
       }
       rec.handler.seek(real - rec.start);
@@ -243,7 +243,7 @@ You may need extra plugins to make it work.`);
   run(reset: boolean = true){
     if(this._running) return;
     if(this._speed > 0){
-      this.handlers.sort((a, b) => a.start + a.handler.duraction - b.start - b.handler.duraction);
+      this.handlers.sort((a, b) => a.start + a.handler.duration - b.start - b.handler.duration);
       this.seek = this.seek_positive;
     }else{
       this.handlers.sort((a, b) => b.start - a.start);

@@ -20,7 +20,7 @@ export class MNumberHandler extends MineHandler<number> {
   seek(time: number){
     this.setter(
       this.start 
-      + (this.end - this.start) * this.ease(time / this.duraction)
+      + (this.end - this.start) * this.ease(time / this.duration)
     );
   }
 }

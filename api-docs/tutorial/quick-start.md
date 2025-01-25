@@ -49,8 +49,8 @@ box.parent = defaultScreen;
 
 // 应用动画
 MineMotion.animate(box.position.offset, [
-  {value: {x: 0, y: 0}, duraction: 0},
-  {value: {x: 100, y: 100}, duraction: 1000, ease: MineEases.easeInOut}
+  {value: {x: 0, y: 0}, duration: 0},
+  {value: {x: 100, y: 100}, duration: 1000, ease: MineEases.easeInOut}
 ], {
   delay: 0,
   speed: 1
@@ -64,7 +64,7 @@ MineMotion.animate(box.position.offset, [
 我们为第二个参数传入了一个列表，其中每一项都是一个关键帧的数据：
 
 - value 属性：表示关键帧的值。只有在这个属性中设置的值才会被应用到动画中。
-- duraction 属性：表示从上一个状态到当前帧的状态花费的时间。在上面的例子中，第一帧的 `duraction` 是0，表示从初始状态到第一帧的状态花费的时间为0毫秒，也就是动画开始直接切换到位置为 (0, 0) 的状态；第二帧的 `duraction` 是1000，表示从第一帧到第二帧的状态花费的时间为1000毫秒，也就是动画从位置为 (0, 0) 切换到位置为 (100, 100) 的状态需要1秒。
+- duration 属性：表示从上一个状态到当前帧的状态花费的时间。在上面的例子中，第一帧的 `duration` 是0，表示从初始状态到第一帧的状态花费的时间为0毫秒，也就是动画开始直接切换到位置为 (0, 0) 的状态；第二帧的 `duration` 是1000，表示从第一帧到第二帧的状态花费的时间为1000毫秒，也就是动画从位置为 (0, 0) 切换到位置为 (100, 100) 的状态需要1秒。
 - ease 属性：表示动画的缓动函数，默认为线性。内置的缓动函数包括但不限于 `linear`, `sine`, `easeIn` 等，你也可以编写自己的缓动函数实现不同的动画效果。
 
 在第三个参数中，我们传入了关于这个动画的一些配置，例如开始前延迟的时间，动画速度等。这个参数并非必须，也就是可以不传入第三个参数，默认的配置为 `{delay: 0, speed: 1}`。
@@ -100,29 +100,29 @@ const box3 = createBox(100, 100, Vec3.create({r: 22, g: 22, b: 222}));
 
 const tl = new MineTimeline();
 tl.animate(box1.position.offset, [
-  {value: {x: 0, y: 0}, duraction: 0},
-  {value: {x: 100, y: 0}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 100, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 0, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 0, y: 0}, duraction: 1000, ease: MineEases.easeInOut}
+  {value: {x: 0, y: 0}, duration: 0},
+  {value: {x: 100, y: 0}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 100, y: 100}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 0, y: 100}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 0, y: 0}, duration: 1000, ease: MineEases.easeInOut}
 ], {
   offset: 0
 });
 tl.animate(box2.position.offset, [
-  {value: {x: 100, y: 0}, duraction: 0},
-  {value: {x: 100, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 0, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 0, y: 0}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 100, y: 0}, duraction: 1000, ease: MineEases.easeInOut}
+  {value: {x: 100, y: 0}, duration: 0},
+  {value: {x: 100, y: 100}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 0, y: 100}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 0, y: 0}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 100, y: 0}, duration: 1000, ease: MineEases.easeInOut}
 ], {
   offset: 1000
 });
 tl.animate(box3.position.offset, [
-  {value: {x: 100, y: 100}, duraction: 0},
-  {value: {x: 0, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 0, y: 0}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 100, y: 0}, duraction: 1000, ease: MineEases.easeInOut},
-  {value: {x: 100, y: 100}, duraction: 1000, ease: MineEases.easeInOut},
+  {value: {x: 100, y: 100}, duration: 0},
+  {value: {x: 0, y: 100}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 0, y: 0}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 100, y: 0}, duration: 1000, ease: MineEases.easeInOut},
+  {value: {x: 100, y: 100}, duration: 1000, ease: MineEases.easeInOut},
 ], {
   offset: 2000
 });
@@ -146,15 +146,15 @@ import { MineTimeline } from "@dao3fun/mine-motion";
 const tl = new MineTimeline();
 
 tl.animate(box.size.offset, [
-  {value: {x: 0}, duraction: 0},
-  {value: {x: 500}, duraction: 100}
+  {value: {x: 0}, duration: 0},
+  {value: {x: 500}, duration: 100}
 ], {
   offset: 0
 });
 tl.animate(box.backgroundColor, [
-  {value: {r: 255, g: 0, b: 0}, duraction: 0},
-  {value: {r: 255, g: 255, b: 0}, duraction: 70},
-  {value: {r: 0, g: 255, b: 0}, duraction: 30}
+  {value: {r: 255, g: 0, b: 0}, duration: 0},
+  {value: {r: 255, g: 255, b: 0}, duration: 70},
+  {value: {r: 0, g: 255, b: 0}, duration: 30}
 ], {
   offset: 0
 });
@@ -248,15 +248,15 @@ const tl = new MineTimeline({
 });
 
 tl.animate(box.size.offset, [
-  {value: {x: 0}, duraction: 0},
-  {value: {x: 500}, duraction: 100}
+  {value: {x: 0}, duration: 0},
+  {value: {x: 500}, duration: 100}
 ], {
   offset: 0
 });
 tl.animate(box.backgroundColor, [
-  {value: {r: 255, g: 0, b: 0}, duraction: 0},
-  {value: {r: 255, g: 255, b: 0}, duraction: 70},
-  {value: {r: 0, g: 255, b: 0}, duraction: 30}
+  {value: {r: 255, g: 0, b: 0}, duration: 0},
+  {value: {r: 255, g: 255, b: 0}, duration: 70},
+  {value: {r: 0, g: 255, b: 0}, duration: 30}
 ], {
   offset: 0
 });

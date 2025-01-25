@@ -16,7 +16,7 @@ export abstract class MineMotion {
     config: {
       start: T[K],
       end: T[K],
-      duraction: number,
+      duration: number,
       ease?: EaseFunc
       speed?: number
     }
@@ -25,7 +25,7 @@ export abstract class MineMotion {
     tl.fromTo(obj, prop, {
       start: config.start,
       end: config.end,
-      duraction: config.duraction,
+      duration: config.duration,
       ease: config.ease ?? MineEases.linear,
       offset: 0
     });
@@ -44,7 +44,7 @@ export abstract class MineMotion {
     prop: K,
     config: {
       end: T[K],
-      duraction: number,
+      duration: number,
       ease?: EaseFunc
       speed?: number
     },
@@ -52,7 +52,7 @@ export abstract class MineMotion {
     const tl = new MineTimeline();
     tl.to(obj, prop, {
       end: config.end,
-      duraction: config.duraction,
+      duration: config.duration,
       ease: config.ease ?? MineEases.linear,
       offset: 0
     });
@@ -68,7 +68,7 @@ export abstract class MineMotion {
    */
   static async animate<T extends MineAnimatable>(
     obj: T,
-    keyframes: {value: Partial<T>, duraction?: number, ease?: EaseFunc}[],
+    keyframes: {value: Partial<T>, duration?: number, ease?: EaseFunc}[],
     config?: {
       delay?: number,
       speed?: number

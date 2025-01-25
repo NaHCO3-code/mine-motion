@@ -12,7 +12,7 @@ type handlerRec = {start: number, end: number, handler: MineHandler<any>};
 export class MineTimeline_Experiment {
   pluseSource: MinePluse;
   handlers: handlerRec[] = [];
-  duraction: number = 0;
+  duration: number = 0;
   now: number = 0;
   private _speed: number = 1;
   private _pluseId: symbol | null = null;
@@ -33,8 +33,8 @@ export class MineTimeline_Experiment {
     if(this._running){
       throw new Error("Can not apply handlers while animation running.");
     }
-    this.handlers.push({start, end: start + handler.duraction, handler: handler});
-    this.duraction = Math.max(this.duraction, start + handler.duraction);
+    this.handlers.push({start, end: start + handler.duration, handler: handler});
+    this.duration = Math.max(this.duration, start + handler.duration);
   }
 
   /**
@@ -93,7 +93,7 @@ export class MineTimeline_Experiment {
     top = this._runningHandlers.top;
     // 扔掉所有 runningHandlers 中已经结束的 handler
     while(top !== null && top.end <= this.now){
-      top.handler.seek(top.handler.duraction);
+      top.handler.seek(top.handler.duration);
       this._runningHandlers.pop();
       top = this._pendingHandlers.top;
     }

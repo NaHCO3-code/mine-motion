@@ -81,7 +81,7 @@ export interface MineHandlerConfig<T> {
   setter: Setter<T>;
   start: T;
   end: T;
-  duraction: number;
+  duration: number;
   ease: EaseFunc;
 }
 
@@ -90,6 +90,6 @@ export interface MineMotionConfig<T extends MineAnimatable> {
   obj: T;
   start: Partial<T>;
   end: Partial<T>;
-  duraction: number;
+  duration: number;
   ease: EaseFunc;
 }

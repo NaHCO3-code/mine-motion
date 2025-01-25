@@ -23,7 +23,7 @@ export class Mine_legacy<T extends MineAnimatable>{
         },
         start: config.start[prop],
         end: config.end[prop],
-        duraction: config.duraction,
+        duration: config.duration,
         ease: config.ease
       });
       if(handler === CanNotAnimateErr){

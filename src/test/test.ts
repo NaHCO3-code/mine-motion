@@ -19,7 +19,7 @@ MinePluginManager.register(new MNumberPlugin());
 //   setter: (v) => {a = v},
 //   start: 0,
 //   end: 1000,
-//   duraction: 1000,
+//   duration: 1000,
 //   ease: MineEases.linear
 // }), 0)
 // tl.applyHandler(new MNumberHandler({
@@ -27,7 +27,7 @@ MinePluginManager.register(new MNumberPlugin());
 //   setter: (v) => {b = v},
 //   start: 0,
 //   end: 1000,
-//   duraction: 500,
+//   duration: 500,
 //   ease: MineEases.linear
 // }), 500)
 // tl.speed = -1;
@@ -56,7 +56,7 @@ const tl = new MineTimeline({
 tl.fromTo(c, 'z', {
   start: 0,
   end: 100,
-  duraction: 10000,
+  duration: 10000,
   ease: MineEases.linear,
   offset: 0
 });

@@ -31,7 +31,7 @@ export interface LazyMotionSetter<
 > {
   start: Partial<T> | null;
   end: Partial<T> | null;
-  duraction: number | null;
+  duration: number | null;
   ease: EaseFunc | null;
   setStart<P extends Partial<T>>
     (start: U extends null ? T extends P ? P : T : U)
@@ -39,7 +39,7 @@ export interface LazyMotionSetter<
   setEnd<P extends Partial<T>>
     (end: U extends null ? T extends P ? P : T : U)
     :LazyMotionSetter<T, U extends null ? P : U>
-  setDuraction(duraction: number): LazyMotionSetter<T, U>
+  setduration(duration: number): LazyMotionSetter<T, U>
   setEase(ease: EaseFunc): LazyMotionSetter<T, U>
   getMotion(): Mine_legacy<U extends null ? never : U>
 }
@@ -63,7 +63,7 @@ export abstract class MineMotion_legacy{
     return {
       start: null,
       end: null,
-      duraction: null,
+      duration: null,
       ease: null,
       // @ts-ignore
       setStart(start) {
@@ -75,8 +75,8 @@ export abstract class MineMotion_legacy{
         this.end = end;
         return this;
       },
-      setDuraction(duraction){
-        this.duraction = duraction;
+      setduration(duration){
+        this.duration = duration;
         return this;
       },
       setEase(ease){
@@ -90,8 +90,8 @@ export abstract class MineMotion_legacy{
         if(this.end === null){
           throw new Error(`Properity end is required. Did you forget calling setEnd()?`);
         }
-        if(this.duraction === null){
-          throw new Error(`Properity duraction is required. Did you forget calling setDuraction()?`);
+        if(this.duration === null){
+          throw new Error(`Properity duration is required. Did you forget calling setduration()?`);
         }
         if(this.ease === null){
           throw new Error(`Properity ease is required. Did you forget calling setEase()?`);
@@ -100,7 +100,7 @@ export abstract class MineMotion_legacy{
           obj, 
           start: this.start, 
           end: this.end, 
-          duraction: this.duraction,
+          duration: this.duration,
           ease: this.ease
         })
       }

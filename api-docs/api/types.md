@@ -31,7 +31,7 @@ MinePlugin 的 `handle` 方法所需的配置对象。
 | setter | [Setter](/api/types.html#setter-lt-t-gt)&lt;T&gt; | 设置动画的属性的函数 |
 | start | T | 动画开始时的值 |
 | end | T | 动画结束时的值 |
-| duraction | number | 动画持续时间，单位为毫秒 |
+| duration | number | 动画持续时间，单位为毫秒 |
 | ease | [EaseFunc](/api/types.html#easefunc) | 动画缓动函数 |
 
 ### MTimelineConfig
