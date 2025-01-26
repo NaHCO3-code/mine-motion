@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Mine Motion 2.0",
   description: "A simple and lightweight animation library.",
-  outDir: '../docs',
+  outDir: './docs',
   base: '/mine-motion/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

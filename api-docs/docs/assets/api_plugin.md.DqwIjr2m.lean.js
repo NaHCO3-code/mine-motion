@@ -1,0 +1,1 @@
+import{_ as a,c as e,ae as i,o as t}from"./chunks/framework.DqPuTaCH.js";const c=JSON.parse('{"title":"Plugin","description":"","frontmatter":{},"headers":[],"relativePath":"api/plugin.md","filePath":"api/plugin.md"}'),r={name:"api/plugin.md"};function l(o,n,m,g,h,p){return t(),e("div",null,n[0]||(n[0]=[i("",11)]))}const u=a(r,[["render",l]]);export{c as __pageData,u as default};

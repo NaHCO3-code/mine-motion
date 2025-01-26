@@ -1,0 +1,1 @@
+import{_ as a,c as i,ae as n,o}from"./chunks/framework.DqPuTaCH.js";const s=JSON.parse('{"title":"概览","description":"","frontmatter":{},"headers":[],"relativePath":"api/overview.md","filePath":"api/overview.md"}'),t={name:"api/overview.md"};function d(l,e,r,c,p,h){return o(),i("div",null,e[0]||(e[0]=[n("",8)]))}const u=a(t,[["render",d]]);export{s as __pageData,u as default};
