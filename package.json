@@ -7,7 +7,7 @@
     "build": "tsc",
     "prepare": "tsc",
     "docs:dev": "vitepress dev api-docs",
-    "docs:build": "vitepress build api-docs",
+    "docs:build": "vitepress build api-docs && cp -r ./api-docs/docs ./docs",
     "docs:preview": "vitepress preview api-docs"
   },
   "files": [

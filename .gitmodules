@@ -1,0 +1,3 @@
+[submodule "api-docs"]
+	path = api-docs
+	url = git@github.com:NaHCO3-code/mine-motion-docs.git
