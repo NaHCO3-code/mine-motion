@@ -1,6 +1,6 @@
 import { Heap } from "./Heap";
-import { MinePluse } from "./Interfaces";
-import { MineHandler } from "./MineHandler";
+import { MinePluse } from "../Interfaces";
+import { MineHandler } from "../MineHandler";
 
 type handlerRec = {start: number, end: number, handler: MineHandler<any>};
 

@@ -3,27 +3,20 @@ type Key = any;
 
 let activeEffect: Effect | null = null;
 
-let targetMap = new WeakMap<Object, Map<Key, Set<Effect>>>();
+let depsMap = new WeakMap<Object, Set<Effect>>();
 
-function track(obj: Object, key: string){
+function track(obj: Object){
   if(!activeEffect) return;
-  let depsMap = targetMap.get(obj);
-  if(!depsMap){
-    depsMap = new Map();
-    targetMap.set(obj, depsMap);
-  }
-  let dep = depsMap.get(key);
+  let dep = depsMap.get(obj);
   if(!dep){
     dep = new Set();
-    depsMap.set(key, dep);
+    depsMap.set(obj, dep);
   }
   dep.add(activeEffect);
 }
 
-function trigger(obj: Object, key: string){
-  const depsMap = targetMap.get(obj);
-  if(!depsMap) return;
-  const dep = depsMap.get(key);
+function trigger(obj: Object){
+  const dep = depsMap.get(obj);
   if(!dep) return;
   dep.forEach(effect => effect());
 }
@@ -39,13 +32,13 @@ export type Computed<T> = {
 export function ref<T>(value: T){
   return {
     get value(){
-      track(this, 'value');
+      track(this);
       return value;
     },
     set value(v: T){
       if(v === value) return;
       value = v;
-      trigger(this, 'value');
+      trigger(this);
     }
   }
 }
@@ -60,7 +53,7 @@ export function watch<T>(update: () => T, callback: ((value: T) => void) | (() =
   effect();
 }
 
-export function computed<T>(update: () => T extends void ? never : T){
+export function computed<T>(update: () => T extends void ? never : T): Computed<T>{
   let value: T;
   const effect = () =>{
     activeEffect = effect;
@@ -70,7 +63,7 @@ export function computed<T>(update: () => T extends void ? never : T){
   effect();
   return {
     get value(){
-      track(this, 'value');
+      track(this);
       return value;
     }
   }

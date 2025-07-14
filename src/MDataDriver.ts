@@ -27,6 +27,9 @@ export class MDataDriver implements MotionDriver {
 
     // 如果数据源或当前值更新
     watch(() => data.value | current.value, () => {
+      if(Number.isNaN(data.value) || Number.isFinite(data.value)){
+        return;
+      }
       // 如果启用了阻尼，并且当前值与数据源值相差过大，则进行阻尼缓动
       if(
         damping.enabled 

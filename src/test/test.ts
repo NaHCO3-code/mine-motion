@@ -1,10 +1,10 @@
 import { MNumberHandler, MNumberPlugin } from "../BasePlugins/MNumberPlugin";
-import { Heap } from "../Heap";
+import { Heap } from "../legacy/Heap";
 import { MineEases } from "../Interfaces";
 import { MineHandler } from "../MineHandler";
 import { MineMotion_legacy } from "../legacy/MineMotion";
 import { MineTimeline } from "../MineTimeline";
-import { MineTimeline_Experiment } from "../MineTimeline_Experiment";
+import { MineTimeline_Experiment } from "../legacy/MineTimeline_Experiment";
 import { MinePluginManager } from "../MinePluginManager";
 import { MDataDriver } from "../MDataDriver";
 import { ref } from "../Reactive";
