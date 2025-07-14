@@ -45,7 +45,7 @@ export interface MotionDriver {
   /**
    * 驱动可被驱动的对象
    * @param motion 需要驱动的对象
-   * @returns 用于移除该驱动的标识符
+   * @returns 驱动的标识符
    */
   drive(motion: MDriveable): symbol;
 

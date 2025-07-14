@@ -7,7 +7,7 @@ export {
 export { MineHandler } from './lib/MineHandler'
 export { MineTimeline } from './lib/MineTimeline'
 export { MineMotion } from './lib/MineMotion'
-export { MineTimeline_Experiment } from './lib/MineTimeline_Experiment'
+export { MineTimeline_Experiment } from './lib/legacy/MineTimeline_Experiment'
 export { MinePluginManager } from './lib/MinePluginManager'
 export { ref, watch, computed, Ref, Computed} from './lib/Reactive'
 export { lerp, damper } from './lib/Motion'

@@ -2,4 +2,8 @@
 
 A simple and lightweight animation library.
 
-See [docs](https://nahco3-code.github.io/mine-motion/)
+一个轻量的动画库。
+
+See [docs](https://nahco3-code.github.io/mine-motion/) here
+
+访问 [文档](https://nahco3-code.github.io/mine-motion/)
